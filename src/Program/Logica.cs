@@ -1,113 +1,92 @@
-namespace Ucu.Poo.GameOfLife;
-
-public class Logica
+namespace Ucu.Poo.GameOfLife
 {
-
-    private static int boardWidth;
-    private static int boardHeight;
-
-
-    public static int BoardWidth
+    public class Logica
     {
-        get => boardWidth;
-        set => boardWidth = value;
-    }
+        private static int boardWidth;
+        private static int boardHeight;
 
-    public static int BoardHeight
-    {
-        get => boardHeight;
-        set => boardHeight = value;
-    }
-
-
-    private static int aliveNeighborsCounter;
-
-    public static int AliveNeighbours
-    {
-        get
+        public static int BoardWidth
         {
-            int aliveNeighbors = 0;
-            for (int x = 0; x < BoardWidth; x++)
+            get => boardWidth;
+            set => boardWidth = value;
+        }
+
+        public static int BoardHeight
+        {
+            get => boardHeight;
+            set => boardHeight = value;
+        }
+
+        private static bool[,] cloneBoard;
+        private static bool[,] gameBoard;
+
+        public static bool[,] ClonedBoard
+        {
+            get => cloneBoard;
+            set => cloneBoard = value;
+        }
+
+        public static bool[,] GameBoard
+        {
+            get => gameBoard;
+            set => gameBoard = value;
+        }
+
+        public static bool[,] UpdatedBoard
+        {
+            get
             {
-                for (int y = 0; y < BoardHeight; y++)
+                cloneBoard = new bool[BoardWidth, BoardHeight]; // Aseguramos que tenga el tamaño correcto
+                for (int x = 0; x < BoardWidth; x++)
                 {
-                    for (int i = x - 1; i <= x + 1; i++)
+                    for (int y = 0; y < BoardHeight; y++)
                     {
-                        for (int j = y - 1; j <= y + 1; j++)
+                        int aliveNeighbors = CountAliveNeighbors(x, y);
+
+                        if (GameBoard[x, y] && aliveNeighbors < 2)
                         {
-                            if (i >= 0 && i < BoardWidth && j >= 0 && j < BoardHeight && GameBoard[i, j])
-                            {
-                                aliveNeighbors++;
-                            }
+                            // Célula muere por baja población
+                            cloneBoard[x, y] = false;
+                        }
+                        else if (GameBoard[x, y] && aliveNeighbors > 3)
+                        {
+                            // Célula muere por sobrepoblación
+                            cloneBoard[x, y] = false;
+                        }
+                        else if (!GameBoard[x, y] && aliveNeighbors == 3)
+                        {
+                            // Célula nace por reproducción
+                            cloneBoard[x, y] = true;
+                        }
+                        else
+                        {
+                            // Célula mantiene el estado que tenía
+                            cloneBoard[x, y] = GameBoard[x, y];
                         }
                     }
                 }
-            }
 
+                return cloneBoard;
+            }
+        }
+
+        // Método para contar vecinos vivos alrededor de una célula
+        private static int CountAliveNeighbors(int x, int y)
+        {
+            int aliveNeighbors = 0;
+            for (int i = x - 1; i <= x + 1; i++)
+            {
+                for (int j = y - 1; j <= y + 1; j++)
+                {
+                    if (i == x && j == y) continue; // Ignora la célula actual
+
+                    if (i >= 0 && i < BoardWidth && j >= 0 && j < BoardHeight && GameBoard[i, j])
+                    {
+                        aliveNeighbors++;
+                    }
+                }
+            }
             return aliveNeighbors;
         }
     }
-
-    private static bool[,] cloneBoard = new bool[boardWidth, boardHeight];
-
-    public static bool[,] ClonedBoard
-    {
-        get => cloneBoard;
-        set => cloneBoard = value;
-    }
-
-    private static bool[,] gameBoard;
-
-    public static bool[,] GameBoard
-    {
-        get => gameBoard;
-        set => gameBoard = value;
-    }
-
-    public static bool[,] UpdatedBoard
-    {
-        get
-        {
-            for (int x = 0; x < BoardWidth; x++)
-            {
-
-                for (int y = 0; y < BoardHeight; y++)
-                {
-                    if (GameBoard[x, y])
-                    {
-                        aliveNeighborsCounter--;
-                    }
-
-                    if (GameBoard[x, y] && AliveNeighbours < 2)
-                    {
-                        //Celula muere por baja población
-                        cloneBoard[x, y] = false;
-                    }
-                    else if (GameBoard[x, y] && AliveNeighbours > 3)
-                    {
-                        //Celula muere por sobrepoblación
-                        UpdatedBoard[x, y] = false;
-                    }
-                    else if (!GameBoard[x, y] && AliveNeighbours == 3)
-                    {
-                        //Celula nace por reproducción
-                        UpdatedBoard[x, y] = true;
-                    }
-                    else
-                    {
-                        //Celula mantiene el estado que tenía
-                        UpdatedBoard[x, y] = GameBoard[x, y];
-                    }
-
-                }
-
-            }
-
-            return UpdatedBoard;
-        }
-    }
-
 }
-
-
-
