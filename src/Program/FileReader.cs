@@ -5,7 +5,7 @@ using System.IO;
 
 public class FileReader
 {
-    public static void ReadFile()
+    public static Board ReadFile()
     {
         string filePath = "board.txt"; 
 
@@ -17,9 +17,11 @@ public class FileReader
         {
             for (int x = 0; x < contentLines[y].Length; x++)
             {
-                board[x, y] = contentLines[y][x] == '1';
+                char cell = contentLines[y][x];
+                board.SetCellState(x, y, cell == '1');
             }
         }
+
+        return board;
     }
-    
 }
