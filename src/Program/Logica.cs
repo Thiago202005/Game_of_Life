@@ -2,58 +2,36 @@ namespace Ucu.Poo.GameOfLife
 {
     public class Logica
     {
-        private static int boardWidth;
-        private static int boardHeight;
+        private Board board;
+        private bool[,] cloneBoard;
 
-        public static int BoardWidth
+        public Logica(Board board)
         {
-            get => boardWidth;
-            set => boardWidth = value;
+            this.board = board;
+            this.cloneBoard = new bool[board.Width, board.Height];
         }
 
-        public static int BoardHeight
-        {
-            get => boardHeight;
-            set => boardHeight = value;
-        }
-
-        private static bool[,] cloneBoard;
-        private static bool[,] gameBoard;
-
-        public static bool[,] ClonedBoard
-        {
-            get => cloneBoard;
-            set => cloneBoard = value;
-        }
-
-        public static bool[,] GameBoard
-        {
-            get => gameBoard;
-            set => gameBoard = value;
-        }
-
-        public static bool[,] UpdatedBoard
+        public bool[,] UpdatedBoard
         {
             get
             {
-                cloneBoard = new bool[BoardWidth, BoardHeight]; // Aseguramos que tenga el tamaño correcto
-                for (int x = 0; x < BoardWidth; x++)
+                for (int x = 0; x < board.Width; x++)
                 {
-                    for (int y = 0; y < BoardHeight; y++)
+                    for (int y = 0; y < board.Height; y++)
                     {
                         int aliveNeighbors = CountAliveNeighbors(x, y);
 
-                        if (GameBoard[x, y] && aliveNeighbors < 2)
+                        if (board.GetCellState(x, y) && aliveNeighbors < 2)
                         {
                             // Célula muere por baja población
                             cloneBoard[x, y] = false;
                         }
-                        else if (GameBoard[x, y] && aliveNeighbors > 3)
+                        else if (board.GetCellState(x, y) && aliveNeighbors > 3)
                         {
                             // Célula muere por sobrepoblación
                             cloneBoard[x, y] = false;
                         }
-                        else if (!GameBoard[x, y] && aliveNeighbors == 3)
+                        else if (!board.GetCellState(x, y) && aliveNeighbors == 3)
                         {
                             // Célula nace por reproducción
                             cloneBoard[x, y] = true;
@@ -61,7 +39,7 @@ namespace Ucu.Poo.GameOfLife
                         else
                         {
                             // Célula mantiene el estado que tenía
-                            cloneBoard[x, y] = GameBoard[x, y];
+                            cloneBoard[x, y] = board.GetCellState(x, y);
                         }
                     }
                 }
@@ -70,8 +48,7 @@ namespace Ucu.Poo.GameOfLife
             }
         }
 
-        // Método para contar vecinos vivos alrededor de una célula
-        private static int CountAliveNeighbors(int x, int y)
+        private int CountAliveNeighbors(int x, int y)
         {
             int aliveNeighbors = 0;
             for (int i = x - 1; i <= x + 1; i++)
@@ -80,7 +57,7 @@ namespace Ucu.Poo.GameOfLife
                 {
                     if (i == x && j == y) continue; // Ignora la célula actual
 
-                    if (i >= 0 && i < BoardWidth && j >= 0 && j < BoardHeight && GameBoard[i, j])
+                    if (i >= 0 && i < board.Width && j >= 0 && j < board.Height && board.GetCellState(i, j))
                     {
                         aliveNeighbors++;
                     }
