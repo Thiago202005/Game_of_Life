@@ -1,4 +1,4 @@
-﻿using System;
+﻿rusing System;
 
 namespace Ucu.Poo.GameOfLife
 {
