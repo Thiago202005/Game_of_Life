@@ -54,7 +54,10 @@ namespace Ucu.Poo.GameOfLife
             {
                 for (int j = y - 1; j <= y + 1; j++)
                 {
-                    if (i == x && j == y) continue; // Ignora la célula actual
+                    if (i == x && j == y)
+                    {
+                        continue;
+                    }
 
                     if (i >= 0 && i < board.Width && j >= 0 && j < board.Height && board.GetCellState(i, j))
                     {

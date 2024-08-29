@@ -18,7 +18,7 @@ public class Board
     {
         this.Width = initialState.GetLength(0);
         this.Height = initialState.GetLength(1);
-        cells = (bool[,])initialState.Clone();  // Clonación para evitar efectos secundarios
+        cells = (bool[,])initialState.Clone();
     }
 
     // Método para obtener el estado de una célula

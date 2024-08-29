@@ -19,8 +19,8 @@ namespace Ucu.Poo.GameOfLife
             while (true)
             {
                 printBoard.ImprimirTablero();
-                board = new Board(logica.UpdatedBoard());  // Asignación correcta del tablero actualizado
-                logica = new Logica(board); // Actualiza la lógica con el nuevo tablero
+                board = new Board(logica.UpdatedBoard()); 
+                logica = new Logica(board);
                 printBoard = new PrintBoard(board);
                 System.Threading.Thread.Sleep(1000);
             }
