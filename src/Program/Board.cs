@@ -36,6 +36,6 @@ public class Board
     // Método para obtener una copia del estado actual del tablero
     public bool[,] GetBoardState()
     {
-        return cells.Clone() as bool[,];
+        return (bool[,])cells.Clone();
     }
 }

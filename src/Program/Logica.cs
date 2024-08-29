@@ -11,42 +11,41 @@ namespace Ucu.Poo.GameOfLife
             this.cloneBoard = new bool[board.Width, board.Height];
         }
 
-        public bool[,] UpdatedBoard
+        public bool[,] UpdatedBoard()
         {
-            get
-            {
-                for (int x = 0; x < board.Width; x++)
-                {
-                    for (int y = 0; y < board.Height; y++)
-                    {
-                        int aliveNeighbors = CountAliveNeighbors(x, y);
+            cloneBoard = new bool[board.Width, board.Height];
 
-                        if (board.GetCellState(x, y) && aliveNeighbors < 2)
-                        {
-                            // Célula muere por baja población
-                            cloneBoard[x, y] = false;
-                        }
-                        else if (board.GetCellState(x, y) && aliveNeighbors > 3)
-                        {
-                            // Célula muere por sobrepoblación
-                            cloneBoard[x, y] = false;
-                        }
-                        else if (!board.GetCellState(x, y) && aliveNeighbors == 3)
-                        {
-                            // Célula nace por reproducción
-                            cloneBoard[x, y] = true;
-                        }
-                        else
-                        {
-                            // Célula mantiene el estado que tenía
-                            cloneBoard[x, y] = board.GetCellState(x, y);
-                        }
+            for (int x = 0; x < board.Width; x++)
+            {
+                for (int y = 0; y < board.Height; y++)
+                {
+                    int aliveNeighbors = CountAliveNeighbors(x, y);
+
+                    if (board.GetCellState(x, y) && aliveNeighbors < 2)
+                    {
+                        // Célula muere por baja población
+                        cloneBoard[x, y] = false;
+                    }
+                    else if (board.GetCellState(x, y) && aliveNeighbors > 3)
+                    {
+                        // Célula muere por sobrepoblación
+                        cloneBoard[x, y] = false;
+                    }
+                    else if (!board.GetCellState(x, y) && aliveNeighbors == 3)
+                    {
+                        // Célula nace por reproducción
+                        cloneBoard[x, y] = true;
+                    }
+                    else
+                    {
+                        // Célula mantiene el estado que tenía
+                        cloneBoard[x, y] = board.GetCellState(x, y);
                     }
                 }
-
-                return cloneBoard;
-            }
-        }
+                
+            } 
+            return cloneBoard;
+    }
 
         private int CountAliveNeighbors(int x, int y)
         {

@@ -2,11 +2,7 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/../PII_Desafio_Menu_1_Start" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/../PII_Git_Challenge_1" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/../PII_Git_Challenge_I_Start" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/../PII_PosterObjectsClassesMessages" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/../PII_Python" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/../desafio_menu" vcs="Git" />
   </component>
 </project>
