@@ -2,7 +2,7 @@ namespace Ucu.Poo.GameOfLife;
 
 using System;
 using System.IO;
-
+/* se decidio separar esta clase de board debido a que si se llegara a cambiar el archivo del tablero o se decidiera generarlo de otra manera generaria una responsabilidad de cambio adicional a la clase board*/
 public class FileReader
 {
     public static Board ReadFile()

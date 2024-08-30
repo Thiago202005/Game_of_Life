@@ -13,15 +13,14 @@ namespace Ucu.Poo.GameOfLife
         public void InitGame()
         {
             Board board = FileReader.ReadFile();
-            Logica logica = new Logica(board);
+            GameRules rules = new GameRules(board);
+            BoardUpdater updater = new BoardUpdater(board, rules);
             PrintBoard printBoard = new PrintBoard(board);
             
             while (true)
             {
                 printBoard.ImprimirTablero();
-                board = new Board(logica.UpdatedBoard()); 
-                logica = new Logica(board);
-                printBoard = new PrintBoard(board);
+                updater.UpdateBoard();
                 System.Threading.Thread.Sleep(1000);
             }
         }

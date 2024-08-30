@@ -2,7 +2,7 @@ using System;
 using System.Runtime.InteropServices.JavaScript;
 using System.Text;
 
-
+/* se decidio separar esta clase de board debido a que sino generaria una responsabilidad de cambio adicional a la clase board como por ejemplo si se cambiara la forma de mostrar el tablero y ahora sea en una interfaz*/
 public class PrintBoard
 {
     private Board board;
