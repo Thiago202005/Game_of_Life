@@ -4,16 +4,14 @@ public class Board
 
     public int Width { get; private set; }
     public int Height { get; private set; }
-
-    // Constructor que inicializa el tablero con un tamaño dado
+    
     public Board(int width, int height)
     {
         this.Width = width;
         this.Height = height;
         cells = new bool[width, height];
     }
-
-    // Constructor que inicializa el tablero con un estado inicial
+    
     public Board(bool[,] initialState)
     {
         this.Width = initialState.GetLength(0);
@@ -33,7 +31,6 @@ public class Board
         cells[x, y] = state;
     }
 
-    // Método para obtener una copia del estado actual del tablero
     public bool[,] GetBoardState()
     {
         return (bool[,])cells.Clone();
