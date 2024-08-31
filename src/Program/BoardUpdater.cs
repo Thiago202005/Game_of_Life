@@ -2,7 +2,7 @@ public class BoardUpdater
 {
     private Board board;
     private GameRules rules;
-/*Se decidio separar esta clase de la logica del juego ya que si decidieramos cambiar que el tablero ya no sea con booleanos generaria mas razones de cambio en logica.cs*/
+/*Se decidio separar esta clase de la logica del juego ya que si decidieramos cambiar que el tablero ya no sea con booleanos generaria mas razones de cambio en gamerules.cs*/
     public BoardUpdater(Board board, GameRules rules)
     {
         this.board = board;

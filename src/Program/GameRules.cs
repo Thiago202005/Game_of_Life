@@ -1,7 +1,6 @@
 public class GameRules
 {
     private Board board;
-/*Se decidio separar esta clase de la logica del juego ya que si decidieramos cambiar la regla generaria mas razones de cambio en logica.cs*/
     public GameRules(Board board)
     {
         this.board = board;
