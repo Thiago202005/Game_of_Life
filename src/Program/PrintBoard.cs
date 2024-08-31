@@ -14,7 +14,7 @@ public class PrintBoard
 
     public void ImprimirTablero()
     {
-        Console.Clear();
+        
         StringBuilder s = new StringBuilder();
         for (int y = 0; y < board.Height; y++)
         {
