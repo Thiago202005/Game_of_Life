@@ -19,6 +19,7 @@ namespace Ucu.Poo.GameOfLife
             
             while (true)
             {
+                Console.Clear();
                 printBoard.ImprimirTablero();
                 updater.UpdateBoard();
                 System.Threading.Thread.Sleep(1000);
